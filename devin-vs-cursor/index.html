@@ -466,8 +466,11 @@ footer a:hover{color:var(--accent);text-decoration:none}
   let W=0,H=0,cols=0,rows=0,dpr=1,mask=null,edgeM=null,halo=null;
 
   /* Subject mark — a magnifier over indexed code lines: the question this report
-     asks is how an agent finds the right code. Bold filled silhouette, since the
-     density mask below turns thin strokes to mush. (bbox ~92.95 x 92.95)
+     asks is how an agent finds the right code. Rendered as a 3D extrusion: the
+     silhouette is stamped along a depth vector in mid-gray (side walls read as
+     mid-density glyphs) with the front face in white on top. Bold filled shapes,
+     since the density mask below turns thin strokes to mush.
+     Front-face bbox ~92.95 x 92.95; EX/EY extrusion added in buildMask.
      Lens is one path: outer circle CW + inner circle CCW = annulus under nonzero fill. */
   const LOGO_PATHS=[
     "M0,34A34,34 0 1,1 68,34A34,34 0 1,1 0,34ZM9,34A25,25 0 1,0 59,34A25,25 0 1,0 9,34Z",
@@ -476,6 +479,7 @@ footer a:hover{color:var(--accent);text-decoration:none}
     "M16,31h40v7H16Z",
     "M16,44h30v7H16Z"
   ];
+  const EX=17, EY=12;   /* depth vector, in mark units */
 
   function buildMask(){
     if(!cols||!rows)return;
@@ -484,11 +488,33 @@ footer a:hover{color:var(--accent);text-decoration:none}
     oc.width=mw; oc.height=mh;
     const c=oc.getContext('2d',{willReadFrequently:true});
     c.fillStyle='#000'; c.fillRect(0,0,mw,mh);
-    const LW=92.95, LH=92.95;
-    const th=mh*.62, s=th/LH, tw=LW*s;
+    const LW=92.95+EX, LH=92.95+EY;
+    const th=mh*.72, s=th/LH, tw=LW*s;
     c.save(); c.translate((mw-tw)/2,(mh-th)/2); c.scale(s,s);
-    c.fillStyle='#fff';
-    LOGO_PATHS.forEach(d=>c.fill(new Path2D(d)));
+    /* 3D build, back to front. stamp() extrudes a set of paths along EX/EY. */
+    const RING=[LOGO_PATHS[0],LOGO_PATHS[1]], BARS=LOGO_PATHS.slice(2);
+    const STEPS=28;
+    const stamp=paths=>{
+      c.fillStyle='#696969';
+      for(let k=STEPS;k>=1;k--){
+        const f=k/STEPS;
+        c.save(); c.translate(EX*f,EY*f);
+        paths.forEach(d=>c.fill(new Path2D(d)));
+        c.restore();
+      }
+    };
+    const front=paths=>{   /* carved dark contour separates face from walls */
+      c.strokeStyle='#000'; c.lineWidth=3.2; c.lineJoin='round';
+      paths.forEach(d=>c.stroke(new Path2D(d)));
+      c.fillStyle='#fff';
+      paths.forEach(d=>c.fill(new Path2D(d)));
+    };
+    stamp(RING);
+    /* punch the lens hole back to background so the ring reads as a ring */
+    c.fillStyle='#000';
+    c.beginPath(); c.arc(34,34,25,0,Math.PI*2); c.fill();
+    stamp(BARS); front(BARS);      /* code lines float inside the glass */
+    front(RING);                   /* ring + handle cover any bar overflow */
     c.restore();
     const px=c.getImageData(0,0,mw,mh).data;
     mask=new Float32Array(cols*rows);
