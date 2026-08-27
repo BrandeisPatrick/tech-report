@@ -28,6 +28,9 @@ a:hover{text-decoration:underline}
 .side-inner{position:sticky;top:40px;display:flex;flex-direction:column;gap:28px}
 .wordmark{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:-.12px;color:var(--ink);line-height:1.4}
 .wordmark:hover{text-decoration:none}
+.brand{display:flex;flex-direction:column;gap:6px}
+.backlink{font-family:var(--mono);font-size:11.5px;letter-spacing:-.1px;color:var(--ink2)}
+.backlink:hover{color:var(--accent);text-decoration:none}
 .side nav{display:flex;flex-direction:column;gap:8px}
 .side nav a{font-family:var(--sans);font-size:15px;line-height:1.3;color:var(--ink)}
 .side nav a:hover{color:var(--accent);text-decoration:none}
@@ -124,7 +127,10 @@ footer a:hover{color:var(--accent);text-decoration:none}
 <div class="page">
   <aside class="side">
     <div class="side-inner">
-      <a class="wordmark" href="#top">DEVIN×CURSOR</a>
+      <div class="brand">
+        <a class="wordmark" href="#top">DEVIN×CURSOR</a>
+        <a class="backlink" href="../">&larr; All reports</a>
+      </div>
       <nav>
         <a href="#summary">Summary</a>
         <a href="#products">The two products</a>
@@ -135,7 +141,7 @@ footer a:hover{color:var(--accent);text-decoration:none}
         <a href="#pricing">Pricing</a>
         <a href="#refs">References</a>
       </nav>
-      <a class="btn" href="https://github.com/BrandeisPatrick/devin-vs-cursor">View repo</a>
+      <a class="btn" href="https://github.com/BrandeisPatrick/tech-report/tree/main/devin-vs-cursor">View repo</a>
     </div>
   </aside>
 
@@ -400,7 +406,7 @@ footer a:hover{color:var(--accent);text-decoration:none}
         <li><strong>H5</strong> — Cursor wins wall-clock on interactive tasks; Devin is more competitive on long autonomous ones.</li>
         <li><strong>H6</strong> — Seeding Devin's Knowledge measurably lifts its scores; Cursor has no equivalent lever.</li>
       </ul>
-      <p class="small-note">Full protocol, controls, and scoring rubrics: <a href="https://github.com/BrandeisPatrick/devin-vs-cursor/blob/main/PLAN.md">PLAN.md</a></p>
+      <p class="small-note">Full protocol, controls, and scoring rubrics: <a href="https://github.com/BrandeisPatrick/tech-report/blob/main/devin-vs-cursor/PLAN.md">PLAN.md</a></p>
     </section>
 
     <section id="pricing" style="max-width:880px">
@@ -433,7 +439,7 @@ footer a:hover{color:var(--accent);text-decoration:none}
         <li><span class="n">[6]</span><a href="https://docs.devin.ai/work-with-devin/deepwiki">Devin Docs — DeepWiki / Devin Wiki</a></li>
         <li><span class="n">[7]</span><a href="https://cognition.com/blog/swe-1-6">Cognition — SWE-1.6</a></li>
         <li><span class="n">[8]</span><a href="https://www.answer.ai/posts/2025-01-08-devin.html">Answer.AI — Thoughts on a Month with Devin</a>, Jan 2025</li>
-        <li><span class="n">[9]</span><a href="https://github.com/BrandeisPatrick/devin-vs-cursor/tree/main/research">Full annotated research notes with confidence tags</a></li>
+        <li><span class="n">[9]</span><a href="https://github.com/BrandeisPatrick/tech-report/tree/main/devin-vs-cursor/research">Full annotated research notes with confidence tags</a></li>
         <li><span class="n">[10]</span><a href="https://www.anthropic.com/engineering/claude-code-best-practices">Anthropic — Claude Code Best Practices (agentic search, no indexing)</a>, Apr 2025</li>
         <li><span class="n">[11]</span><a href="https://trickle.so/blog/devin-ai-or-cursor">Trickle — Devin AI or Cursor</a>, Jul 2025</li>
         <li><span class="n">[12]</span><a href="https://www.builder.io/blog/devin-vs-cursor">Builder.io — Devin vs Cursor: modes, not features</a>, updated Jan 2026</li>
@@ -442,7 +448,7 @@ footer a:hover{color:var(--accent);text-decoration:none}
 
     <footer>
       <span>devin×cursor eval lab — a research project by Patrick Li</span>
-      <span><a href="https://github.com/BrandeisPatrick/devin-vs-cursor">GitHub</a></span>
+      <span><a href="https://github.com/BrandeisPatrick/tech-report/tree/main/devin-vs-cursor">GitHub</a></span>
     </footer>
   </article>
 </div>

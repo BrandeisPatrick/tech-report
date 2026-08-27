@@ -2,7 +2,7 @@
 
 A technical comparison of Devin (Cognition) and Cursor (Anysphere), focused on their **semantic layers** — how each product indexes, retrieves, and understands codebases.
 
-**Live report:** https://brandeispatrick.github.io/devin-vs-cursor/
+**Live report:** https://brandeispatrick.github.io/tech-report/devin-vs-cursor/
 
 - [REPORT.md](REPORT.md) — the technical report (pre-test, v0)
 - [PLAN.md](PLAN.md) — evaluation design: probes, hypotheses, protocol
